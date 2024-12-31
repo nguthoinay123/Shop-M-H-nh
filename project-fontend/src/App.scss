@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+@media (min-width: 1400px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+      max-width: 1350px !important;
+  }
+}
+.App-container{
+  .header-container{
+    .btn-login{
+      border-radius: 5px;
+      border: 1px solid #535353;
+      padding: 0 15px;
+      margin-right: 15px;
+      height: 40px;
+      
+    }
+    .btn-sigup{
+      border-radius: 5px;
+      background: #303030;
+      color: white;
+      padding: 0 15px;
+      height: 40px;
+
+      &:hover{
+        background: black;
+      }
+    }
+    .navbar-brand {
+      padding-top: 20px;
+      position: relative; /* Đảm bảo áp dụng z-index */
+      z-index: 10; /* Cao hơn navbar-nav */
+  }
+    .navbar-nav{
+      padding-top: 20px;
+      position: relative; /* Giữ vị trí của navbar-nav */
+      z-index: 10; /* Đảm bảo cao hơn video */
+      .nav-link{
+        &.active{
+          color: #00bfff;
+        }
+      }
+    }
+  }
+  .homepage-container{
+    .homepage-content{
+      padding: 100px;
+      width: 50%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap:30px
+    }
+      .title-content-1{
+        font-size: 35px;
+        font-weight: 600px;
+      }
+      .title-content-2{
+        font-size: 22px;
+      }
+      .title-content-3{
+        button{
+          border-radius: 5px;
+          background: #303030;
+          color: white;
+          padding: 0 15px;
+          height: 40px;
+          border: none;
+    
+          &:hover{
+            background: black;
+          }
+        }
+      }
+  }  
+}
+
+video {
+  position: fixed;
+  bottom: 0;
+  
+  width: 100vw;
+
+}
