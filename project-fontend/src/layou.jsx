@@ -15,7 +15,12 @@ const NotFound=()=>{
         </div>
     )
 }
+const ProgressBar = ({ progress = 0 }) => {
+  // Logic của component
+};
+
 const Layout=(props)=>{
+    
     return (
         <>
             <Routes>
@@ -40,7 +45,7 @@ const Layout=(props)=>{
                 pauseOnHover
                 theme="light"
                />
-            <ToastContainer />
+           
         </>
     )
 }

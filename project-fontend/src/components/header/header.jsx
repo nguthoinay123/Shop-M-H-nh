@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const Header=()=> {
   const isAuthenticated= useSelector( state=> state.user.isAuthenticated);
   const account= useSelector( state=> state.user.account);
-
+  console.log(account)
   const navigate = useNavigate();
   const handleLogin=()=>{
     navigate('/login');
@@ -19,11 +19,11 @@ const Header=()=> {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         {/* <Navbar.Brand href="#home">Thái Ân</Navbar.Brand> */}
-        <NavLink to='/' className="navbar-brand">Thái Ân</NavLink>
+        <NavLink to='/' className="navbar-brand">Mô Hình Shop</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to='/' className="nav-link">Home</NavLink>
+            <NavLink to='/' className="nav-link">Trang Chủ</NavLink>
             <NavLink to='/admin' className="nav-link">Admin</NavLink>
           </Nav>
           <Nav>
@@ -33,8 +33,9 @@ const Header=()=> {
                 <button className="btn-sigup" onClick={()=> handleSignup()}>Sign up</button>
               </>:
               <NavDropdown title="Setting" id="basic-nav-dropdown">
-                  <NavDropdown.Item >Logout</NavDropdown.Item>
+                  <NavDropdown.Item >{account.name}</NavDropdown.Item>
                   <NavDropdown.Item >Profile</NavDropdown.Item>
+                  <NavDropdown.Item >Logout</NavDropdown.Item>
               </NavDropdown> 
              }
           </Nav>

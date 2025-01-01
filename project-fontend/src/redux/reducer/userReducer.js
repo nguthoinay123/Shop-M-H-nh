@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     account:{
         access_token:'',
         refresh_token:'',
-        username:'',
+        name:'',
         image:'',
         role:'',
     },
@@ -18,10 +18,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, account:{
                     access_token: action?.payload?.DT?.access_token,
-                    refresh_token: action?.payload?.DT?.refresh_token,
-                    username: action?.payload?.DT?.username,
-                    image:  action?.payload?.DT?.image,
-                    role: action?.payload?.DT?.role,
+                    refresh_token: action?.payload?.DT?.user?.refresh_token,
+                    name: action?.payload?.DT?.user?.name,
+                    image:  action?.payload?.DT?.user?.image,
+                    role: action?.payload?.DT?.user?.role,
                 },
                 isAuthenticated:true
             };

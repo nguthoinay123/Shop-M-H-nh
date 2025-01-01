@@ -12,11 +12,9 @@ const Login=(props)=>{
     const [email, setEmail]=useState("");
     const [password, setPassword]=useState("");
     const dispatch = useDispatch();
-    const navigate=useNavigate();
-    const [isLoading, setIsLoading]=useState(false)
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false)
     const [isShowPassword, setIsShowPassword] = useState(false);
-
-
     const validateEmail = (email) => {
         return String(email)
           .toLowerCase()
@@ -40,6 +38,7 @@ const Login=(props)=>{
         setIsLoading(true)
         //sumitlogin
         let data = await postLogin(email, password)
+        console.log('check',data)
         if(data && data.EC===0){
             dispatch(doLogin(data))
             toast.success(data.EM)

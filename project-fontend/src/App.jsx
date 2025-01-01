@@ -4,11 +4,10 @@ import Header from './components/header/header';
 
 
 const App = () => {
-
   return (
     <div className="App-container">
       <div className="header-container">
-      <Header/>
+      <Header />
       </div>
       <div className="main-container">
           <div className="sidenav-container">
