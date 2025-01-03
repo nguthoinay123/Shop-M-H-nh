@@ -173,16 +173,36 @@ public function login()
             // ], 500);
         }
     }
-       
-    public function logout(){
-        try {
+
+public function logout(Request $request)
+{
+    try {
+        // Lấy token từ header Authorization
+        $token = $request->bearerToken();
+
+        if ($token) {
+            // Thực tế, không cần xóa gì ở server vì JWT là stateless.
+            // Bạn chỉ cần thông báo cho client rằng đăng xuất thành công.
+
             return response()->json([
-                'EM'=>'logout success'
-            ]);
-        }catch (\Throwable $th){
-            return response()->json([
-                'errors'=> $th->getMessage()
-            ], 500);  
+                'EM' => 'Logout successful',
+                'EC' => 0,
+                'DT' => ''
+            ], 200);
         }
+
+        return response()->json([
+            'EM' => 'Token not provided',
+            'EC' => 1,
+            'DT' => ''
+        ], 400);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'EM' => 'Unexpected error: ' . $e->getMessage(),
+            'EC' => 1,
+            'DT' => '',
+        ], 500);
     }
+}
 }

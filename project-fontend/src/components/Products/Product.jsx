@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProduct } from "../../services/apiService";
 import './product.scss'
+import { IoCart } from "react-icons/io5";
 
 const Product=()=>{
     const [products, setProducts]=useState([]);
@@ -19,20 +20,27 @@ const Product=()=>{
     
 
     return(
+        <div>
+        <div className="text-center" >
+            Tất Cả Mô Hình
+        </div>
+
        <div className="product-container container">  
+            
             {products && products.length >0 &&
                 products.map((item,index)=>{
                     return (
                         <div key={`${index}-product`} className="card" style={{width: "15rem"}}>
-                            {/* <img src={`data:image/jpeg;base64,${item.image}`} className="card-img-top" alt="..."/> */}
+                            <button className="btn-addtocart"> <IoCart/></button>
                                 <img 
                                 src={item.image}  
                                 style={{ borderRadius: "5px" }}/>
                             <div className="card-body">
-                                <h5 className="card-title">{item.name}</h5>
-                                <p className="card-text">{item.price}</p>
-                                {/* <button onClick={()=>navigate(`/quiz/${item.id}`,{state:{ quiztitle: item.description}})} className="btn btn-primary">Start Now</button> */}
+                                <h5 className="card-title text-danger">{item.name}</h5>
+                                <p className="card-text">{item.price} VNĐ</p>
                             </div>
+                            <button className="btn-detail">Chi Tiết</button>
+
                         </div>
                     )
                 })
@@ -44,6 +52,7 @@ const Product=()=>{
             }
 
            
+        </div>
         </div>
     )
 }

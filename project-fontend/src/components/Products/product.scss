@@ -1,9 +1,64 @@
 .product-container{
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;              
     gap: 30px;                    
     justify-content: center;
+    .card {
+    position: relative;
+
+    // Nút "Add to Cart"
+    .btn-addtocart {
+        border-radius: 5px;
+        width: 35px;
+        background-color: white;
+        position: absolute;
+        right: 0;
+        display: none; // Ẩn nút mặc định
+        opacity: 0;    // Ẩn bằng opacity
+        transition: opacity 0.3s ease-in-out; // Hiệu ứng mượt mà
+
+        &:hover {
+            background-color: rgb(66, 227, 189); // Thay đổi màu khi hover vào nút
+        }
+    }
+
+    // Nút "Detail"
+    .btn-detail {
+        position: absolute;
+        top: 50%;            // Đưa nút xuống giữa theo chiều dọc
+        left: 50%;           // Đưa nút vào giữa theo chiều ngang
+        width: 100px;
+        transform: translate(-50%, -50%); // Căn chỉnh hoàn toàn vào giữa
+        background-color: rgb(252, 80, 80);
+        border-radius: 5px;
+        border: none;
+        padding: 10px 20px;  // Kích thước nút
+        text-align: center;
+        display: none;       // Ẩn nút mặc định
+        opacity: 0;          // Ẩn bằng opacity
+        transition: opacity 0.3s ease-in-out; // Hiệu ứng mượt mà
+    }
+
+    // Khi di chuột vào thẻ card
+    &:hover {
+        .btn-addtocart {
+            display: block; // Hiển thị nút
+            opacity: 1;     // Hiện hoàn toàn
+        }
+
+        .btn-detail {
+            display: block; // Hiển thị nút
+            opacity: 1;     // Hiện hoàn toàn
+        }
+    }
+}
+
     
     
+}
+.text-center{
+   font-size: 30px;
+    font-weight: 600;
+    padding-top: 40px;
 }

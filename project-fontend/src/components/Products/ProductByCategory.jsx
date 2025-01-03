@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getProductbyCategory } from '../../services/apiService';
 import './ProductByCategory.scss'
-import Header from "../header/header";
+import { IoCart } from "react-icons/io5";
+
 const ProductByCategory = (props) => {
     const [productByCategory, setProductByCategory] = useState([]);
     const navigate = useNavigate();
+    const location = useLocation();
     const { slug } = useParams(); // Lấy slug từ URL
 
     useEffect(() => {
@@ -26,20 +28,23 @@ const ProductByCategory = (props) => {
 
     return (
         <div>
-
-        <Header/>
+         <div className="title">
+            {location?.state?.categoriestitle} 
+        </div>
         <div className="product-by-category container">  
+      
             {productByCategory && productByCategory.length >0 &&
                 productByCategory.map((item,index)=>{
                     return (
                         <div key={`${index}-product`} className="card" style={{width: "15rem"}}>
-                            {/* <img src={`data:image/jpeg;base64,${item.image}`} className="card-img-top" alt="..."/> */}
+                            <button className="btn-addtocart"> <IoCart/></button>     
                             <img src={item.image}  />
                             <div className="card-body">
                                 <h5 className="card-title">{item.name}</h5>
                                 <p className="card-text">{item.price}</p>
-                                {/* <button onClick={()=>navigate(`/quiz/${item.id}`,{state:{ quiztitle: item.description}})} className="btn btn-primary">Start Now</button> */}
                             </div>
+                            <button className="btn-detail">Chi Tiết</button>
+
                         </div>
                     )
                 })
@@ -52,8 +57,8 @@ const ProductByCategory = (props) => {
 
            
         </div>
-                    
         </div>
+                    
     );
 };
 

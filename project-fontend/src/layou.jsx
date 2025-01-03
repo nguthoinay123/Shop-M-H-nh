@@ -29,8 +29,9 @@ const Layout=(props)=>{
                 <Route path="/" element={<App />} >
                     <Route index element={<HomePage/>} />
                     <Route path="product" element={<Product/>} />
+                    <Route path="category/:slug" element={<ProductByCategory />} />
+
                 </Route>
-                <Route path="category/:slug" element={<ProductByCategory />} />
 
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
