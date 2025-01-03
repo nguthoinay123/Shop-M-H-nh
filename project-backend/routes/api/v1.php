@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Category\CategoryController;
+use App\Http\Controllers\API\Product\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('register', [AuthController::class, 'signup']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('products', [ProductController::class, 'products']);
+Route::get('/category/{slug}', [ProductController::class, 'getProductsByCategory']);
+Route::get('category', [CategoryController::class, 'category']);
+

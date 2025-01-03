@@ -48,6 +48,7 @@ body {
           color: #00bfff;
         }
       }
+     
     }
   }
   .homepage-container{
@@ -65,21 +66,19 @@ body {
       }
       .title-content-2{
         font-size: 22px;
-      }
-      .title-content-3{
-        button{
-          border-radius: 5px;
-          background: #303030;
-          color: white;
-          padding: 0 15px;
-          height: 40px;
-          border: none;
-    
-          &:hover{
-            background: black;
-          }
+         display: flex; /* Đặt các phần tử con trên một hàng */
+        justify-content: space-between; /* Căn giữa hoặc phân bố đều các hình ảnh */
+        gap: 20px; /* Khoảng cách giữa các bức hình */
+        img {
+          border-radius: 10px; /* Bo góc hình ảnh */
+          width: 100%; /* Cài đặt chiều rộng của từng bức hình (có thể thay đổi theo nhu cầu) */
+          height: auto;
         }
+        
       }
+      // .title-content-3{
+       
+      // }
   }  
 }
 

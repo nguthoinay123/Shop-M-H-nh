@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id'); // Thêm cột address_id
             $table->string('description')->nullable();
             $table->integer('total_price');
-            $table->enum('status', ['pending','shiping','success','cancle'])->default('pending');
+            $table->enum('status', ['pending','confirm','shiping','success','cancle'])->default('pending');
             $table->date('expected_date');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('voucher_id')->nullable();

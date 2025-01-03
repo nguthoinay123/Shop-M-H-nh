@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./components/Home/HomePage";
 import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
+import Product from "./components/Products/Product";
+import ProductByCategory from "./components/Products/ProductByCategory";
 const NotFound=()=>{
     return(
         <div className="alert alert-danger container mt-3">
@@ -26,8 +28,9 @@ const Layout=(props)=>{
             <Routes>
                 <Route path="/" element={<App />} >
                     <Route index element={<HomePage/>} />
-                   
+                    <Route path="product" element={<Product/>} />
                 </Route>
+                <Route path="category/:slug" element={<ProductByCategory />} />
 
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
