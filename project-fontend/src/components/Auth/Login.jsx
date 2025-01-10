@@ -38,9 +38,13 @@ const Login=(props)=>{
         setIsLoading(true)
         //sumitlogin
         let data = await postLogin(email, password)
-        console.log('check',data)
+        // let res = await getCart();
+        // console.log('check',data)
         if(data && data.EC===0){
             dispatch(doLogin(data))
+        //   if (res && res.cart) {
+        //     dispatch(fetchCartSuccess(res.cart));  // Giả sử fetchCartSuccess là action để cập nhật giỏ hàng
+        // }
             toast.success(data.EM)
             setIsLoading(false)
             navigate('/')

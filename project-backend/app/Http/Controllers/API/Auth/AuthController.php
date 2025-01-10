@@ -11,16 +11,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Firebase\JWT\JWT;
-
+use Firebase\JWT\Key;
 
 
 class AuthController extends Controller
 {
-    /** 
-     * Login the user
-    *@param Request
-    *@return User
-    */
 
 public function login()
 {
@@ -34,7 +29,6 @@ public function login()
         // Tìm người dùng trong cơ sở dữ liệu
         $user = User::where('email', request('email'))->first();
 
-        // Kiểm tra xem người dùng có tồn tại không
         if (!$user) {
             return response()->json([
                 'EM' => 'Email không tồn tại',
@@ -52,35 +46,40 @@ public function login()
             ], 200);
         }
 
-        // Tạo Access Token
+        // Tạo Access Token với claims đầy đủ
+        $payload = [
+            'sub' => $user->id,                 // Subject của token
+            'email' => $user->email,            // Thông tin người dùng
+            'iat' => time(),                    // Thời gian phát hành
+            'exp' => time() + 60 * 60 * 24,     // Thời gian hết hạn (24 giờ)
+        ];
+
         $accessToken = JWT::encode(
-            ['user_id' => $user->id],   // Dữ liệu mà bạn muốn mã hóa vào token
-            env('JWT_SECRET'),          // Khóa bí mật từ .env
-            'HS256'                     // Thuật toán mã hóa
+            $payload,
+            env('JWT_SECRET'),                  // Khóa bí mật từ .env
+            'HS256'                             // Thuật toán mã hóa
         );
 
-        // Trả về thông tin người dùng và Access Token
         return response()->json([
             'DT' => [
-                  'access_token' => $accessToken,
+                'access_token' => $accessToken,
                 'user' => $user
             ],
             'EC' => 0,
             'EM' => "Login succeed"
         ], 200);
-
-    } catch(\Throwable $th){
-            if($th instanceof ValidationException){
-                return response()->json([
-                    'EM'=> $th->getMessage()
-                ], 400);
-            }
+    } catch (\Throwable $th) {
+        if ($th instanceof ValidationException) {
             return response()->json([
-                'EM'=> $th->getMessage()
-            ], 500);
+                'EM' => $th->getMessage()
+            ], 400);
         }
-
+        return response()->json([
+            'EM' => $th->getMessage()
+        ], 500);
+    }
 }
+
 
 
 
@@ -205,4 +204,64 @@ public function logout(Request $request)
         ], 500);
     }
 }
+    public function profile(Request $request){
+    try {
+        // Lấy token từ header Authorization
+        $authHeader = $request->header('Authorization');
+        if (!$authHeader || !str_starts_with($authHeader, 'Bearer ')) {
+            return response()->json([
+                'EM' => 'Unauthorized: Token không được cung cấp',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Giải mã token
+        $token = str_replace('Bearer ', '', $authHeader);
+        try {
+            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'EM' => 'Unauthorized: Token không hợp lệ hoặc hết hạn',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Kiểm tra payload
+        if (!isset($decoded->sub)) {
+            return response()->json([
+                'EM' => 'Invalid token payload',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Lấy thông tin user
+        $userId = $decoded->sub;
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json([
+                'EM' => 'Unauthorized: Người dùng không hợp lệ',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Trả về thông tin user (ẩn các trường nhạy cảm)
+        $userData = $user->only(['id', 'name', 'email']);
+        return response()->json([
+            'EM' => 'get user information success',
+            'EC' => 0,
+            'DT' => $userData
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'EM' => 'Server error: ' . $e->getMessage(),
+            'EC' => 2,
+            'DT' => ''
+        ], 500);
+    }
+}
+
 }

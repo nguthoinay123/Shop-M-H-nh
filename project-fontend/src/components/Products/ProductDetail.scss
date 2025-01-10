@@ -1,0 +1,147 @@
+.product-detail-container {
+    margin-top: 70px;
+
+    .product-detail {
+        border: 1px solid rgb(255, 162, 0);
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        display: flex;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  // Thêm bóng để nổi bật
+
+        .product-detail-content {
+            display: flex;
+            padding: 10px;
+            gap: 20px; // Giữa ảnh và nội dung có khoảng cách
+            justify-content: center;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .card-detail {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 80%;
+                border-radius: 5px;
+                object-fit: cover;  // Đảm bảo hình ảnh không bị méo
+            }
+        }
+
+        .product-detail-body {
+            flex: 1;
+            padding-left: 20px;
+
+            .btn-addtocart {
+                background-color: rgb(252, 80, 80);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: rgb(116, 244, 107); // Màu khi hover
+                }
+            }
+
+            h5 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .card-text {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .related-product {
+        margin-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+
+        .card-related {
+            position: relative;
+            width: 15rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Thêm bóng để nổi bật
+
+            .btn-addtocart {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                background-color: rgb(252, 80, 80);
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                border: none;
+                display: none; // Ẩn nút mặc định
+
+                &:hover {
+                    background-color: rgb(116, 244, 107);
+                }
+            }
+
+            &:hover .btn-addtocart {
+                display: block; // Hiện nút khi hover vào sản phẩm
+            }
+
+            img {
+                width: 100%;
+                border-radius: 5px;
+                object-fit: cover;
+            }
+
+            .card-body {
+                padding: 10px;
+
+                h5 {
+                    font-size: 1.2rem;
+                    color: rgb(255, 70, 0);
+                    margin-bottom: 10px;
+                }
+
+                .card-text {
+                    font-size: 1rem;
+                    color: rgb(30, 30, 30);
+                }
+            }
+
+            .btn-detail {
+        position: absolute;
+        top: 50%;            // Đưa nút xuống giữa theo chiều dọc
+        left: 50%;           // Đưa nút vào giữa theo chiều ngang
+        width: 100px;
+        transform: translate(-50%, -50%); // Căn chỉnh hoàn toàn vào giữa
+        background-color: rgb(252, 80, 80);
+        border-radius: 5px;
+        border: none;
+        padding: 10px 20px;  // Kích thước nút
+        text-align: center;
+        display: none;       // Ẩn nút mặc định
+        opacity: 0;          // Ẩn bằng opacity
+        transition: opacity 0.3s ease-in-out; // Hiệu ứng mượt mà
+        &:hover {
+            background-color: rgb(116, 244, 107); // Thay đổi màu khi hover vào nút
+        }
+    }
+
+    
+    &:hover {
+        .btn-detail {
+            display: block; // Hiển thị nút
+            opacity: 1;     // Hiện hoàn toàn
+        }
+    }
+        }
+    }
+}

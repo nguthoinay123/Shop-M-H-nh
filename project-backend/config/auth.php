@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+    'api' => [
+        'driver' => 'jwt', // Hoặc driver khác nếu bạn sử dụng
+        'provider' => 'users',
+    ],
+
     ],
 
     /*

@@ -1,6 +1,4 @@
-import { FETCH_USER_LOGIN_SUCCESS } from '../action/userAction';
-import { INCREMENT, DECREMENT } from '../action/counterAction';
-import { LOGOUT } from '../action/counterAction'
+import { FETCH_USER_LOGIN_SUCCESS, LOGOUT } from '../action/userAction';
 
 const INITIAL_STATE = {
     account:{
@@ -12,12 +10,13 @@ const INITIAL_STATE = {
     },
     isAuthenticated : false,
     
+    
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_USER_LOGIN_SUCCESS:
-            console.log('check action',action)
+            // console.log('check action',action)
             return {
                 ...state, account:{
                     access_token: action?.payload?.DT?.access_token,
@@ -26,25 +25,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     image:  action?.payload?.DT?.user?.image,
                     role: action?.payload?.DT?.user?.role,
                 },
-                isAuthenticated:true
+                isAuthenticated:true,
+                // cart: action.payload.cart, // Cập nhật giỏ hàng từ DB
+
             };
         case LOGOUT: // Khi logout
             return {
-                ...state,
-                account: {
-                    access_token: '',
-                    refresh_token: '',
-                    name: '',
-                    image: '',
-                    role: '',
-                },
-                isAuthenticated: false,
+                 ...INITIAL_STATE, // Reset tất cả thông tin về người dùng và giỏ hàng
+
             };
 
-        case DECREMENT:
-            return {
-                ...state, count: state.count - 1,
-            };
+       
         default: return state;
     }
     

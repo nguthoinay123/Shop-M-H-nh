@@ -10,6 +10,9 @@ import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
 import Product from "./components/Products/Product";
 import ProductByCategory from "./components/Products/ProductByCategory";
+import ProductDetail from "./components/Products/Productdetail";
+import Cart from "./components/Cart/Cart";
+
 const NotFound=()=>{
     return(
         <div className="alert alert-danger container mt-3">
@@ -30,6 +33,8 @@ const Layout=(props)=>{
                     <Route index element={<HomePage/>} />
                     <Route path="product" element={<Product/>} />
                     <Route path="category/:slug" element={<ProductByCategory />} />
+                    <Route path="/product/detail/:slug" element={<ProductDetail />} />
+                    <Route path="/cart" element={<Cart/>} />
 
                 </Route>
 

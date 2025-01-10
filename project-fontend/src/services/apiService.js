@@ -16,5 +16,19 @@ const getCategory=()=>{
 const getProductbyCategory = (slug) => {
   return axios.get(`api/v1/category/${slug}`);
 }
-
-export {postLogin, postSignup, getProduct, getCategory, getProductbyCategory}
+const getProductDetail = (slug) => {
+  return axios.get(`api/v1/product/detail/${slug}`);
+}
+const getCart=()=>{
+    return axios.get('api/v1/cart')
+}
+const postAddToCart=(product_id,quantity)=>{
+    return axios.post(`api/v1/cart/add-to-cart`,{product_id,quantity})
+}
+const patchCartUpdate=(product_id,quantity)=>{
+    return axios.patch(`api/v1/cart/update/${product_id}`,{quantity})
+}
+const DeleteCart=(product_id)=>{
+    return axios.delete(`api/v1/cart/remove/${product_id}`)
+}
+export {postLogin, postSignup, getProduct, getCategory, getProductbyCategory, getProductDetail, getCart, postAddToCart, patchCartUpdate, DeleteCart}

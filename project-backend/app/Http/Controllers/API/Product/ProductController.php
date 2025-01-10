@@ -26,20 +26,16 @@ class ProductController extends Controller
   public function getProductsByCategory(Request $request, $slug)
 {
     try {
-        // Tìm danh mục theo slug
         $category = Category::where("slug", $slug)->firstOrFail();
         
-        // Lấy sản phẩm thuộc danh mục và có trạng thái 'unhide'
         $products = Product::where("category_id", $category->id)
                            ->where('status', 'unhide')
-                           ->get(); // Phải gọi .get() để thực thi truy vấn
+                           ->get(); 
         
-        // Kiểm tra nếu không có sản phẩm
         if ($products->isEmpty()) {
             return response()->json(['message' => 'No products found in this category.'], 404);
         }
 
-        // Trả về sản phẩm
         return response()->json([
             'EM' => 'Get products by category success',
             'DT' => $products,
@@ -51,6 +47,30 @@ class ProductController extends Controller
       
        
     }
+}
+public function product_detail($slug){
+    $product = Product::where('slug', $slug)->where('status', 'unhide')->first();
+    $related_products = Product::where('category_id', $product->category_id)
+                                ->where('status', 'unhide')
+                                ->where('id', '!=', $product->id)
+                                ->limit(4)
+                                ->get();
+    if (!$product) {
+        return response()->json([
+            'EM' => 'Product not found or hidden',
+            'EC' => 1,
+            'DT' => null
+        ], 404);
+    }
+    return response()->json([
+        'EM' => 'Get product detail success',
+        'EC' => 0,
+        'DT' => [
+            'PDT'=>$product,
+            'RLP'=>$related_products,
+        ]
+
+    ], 200);
 }
 
 }
