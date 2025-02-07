@@ -249,11 +249,87 @@ public function logout(Request $request)
         }
 
         // Trả về thông tin user (ẩn các trường nhạy cảm)
-        $userData = $user->only(['id', 'name', 'email']);
+        $userData = $user->only(['id', 'name', 'email', 'image', 'phone', 'address']);
         return response()->json([
             'EM' => 'get user information success',
             'EC' => 0,
             'DT' => $userData
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'EM' => 'Server error: ' . $e->getMessage(),
+            'EC' => 2,
+            'DT' => ''
+        ], 500);
+    }
+}
+    public function updateprofile(Request $request)
+{
+    try {
+        // Lấy token từ header Authorization
+        $authHeader = $request->header('Authorization');
+        if (!$authHeader || !str_starts_with($authHeader, 'Bearer ')) {
+            return response()->json([
+                'EM' => 'Unauthorized: Token không được cung cấp',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Giải mã token
+        $token = str_replace('Bearer ', '', $authHeader);
+        try {
+            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'EM' => 'Unauthorized: Token không hợp lệ hoặc hết hạn',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Kiểm tra payload
+        if (!isset($decoded->sub)) {
+            return response()->json([
+                'EM' => 'Invalid token payload',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Lấy thông tin user
+        $userId = $decoded->sub;
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json([
+                'EM' => 'Unauthorized: Người dùng không hợp lệ',
+                'EC' => 1,
+                'DT' => ''
+            ], 401);
+        }
+
+        // Validate input dữ liệu cập nhật
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',  // Có thể thêm các trường khác như email, địa chỉ, ...
+   // Có thể thêm các trường khác như email, địa chỉ, ...
+            // Thêm các trường khác nếu cần
+        ]);
+
+        // Cập nhật thông tin người dùng
+        $user->name = $request->name;  // Cập nhật tên người dùng
+        $user->phone = $request->phone;  // Cập nhật tên người dùng
+        // Nếu có thêm trường khác cần cập nhật thì cũng gán tương tự
+        // $user->email = $request->email; // Ví dụ cập nhật email
+        $user->address = $request->address; // Cập nhật địa chỉ
+
+        $user->save(); // Lưu thông tin đã cập nhật
+
+        return response()->json([
+            'EM' => 'Cập nhật thông tin thành công',
+            'EC' => 0,
+            'DT' => $user
         ]);
     } catch (\Exception $e) {
         return response()->json([

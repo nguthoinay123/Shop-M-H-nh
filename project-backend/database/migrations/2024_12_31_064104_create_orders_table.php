@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('user_name');
             $table->string('user_phone');
-            $table->unsignedBigInteger('address_id'); // Thêm cột address_id
+            $table->string('user_address');
             $table->string('description')->nullable();
             $table->integer('total_price');
             $table->enum('status', ['pending','confirm','shiping','success','cancle'])->default('pending');
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->unsignedBigInteger('shipping_method_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign( 'address_id')->references('id')->on('addresses')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('voucher_id')->references('id')->on('vouchers')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('payment_method_id')->references('id')->on('payment_method')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('shipping_method_id')->references('id')->on('shipping_method')->onDelete('restrict')->onUpdate('restrict');

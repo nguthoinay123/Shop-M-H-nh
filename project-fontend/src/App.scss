@@ -122,7 +122,92 @@ body {
       }
     }
 
-  }  
+  } 
+  .footer-container{
+    margin-top: 100px;
+    .footer-content {
+      background-color: #1e1e1e; // Màu nền tối
+      color: #fff; // Màu chữ trắng
+      padding: 40px 20px;
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+
+        .col-md-4 {
+          text-align: left;
+
+          .mt-5 {
+            margin-top: 20px;
+
+            p {
+              margin-bottom: 10px;
+              font-size: 14px;
+              line-height: 1.6;
+              display: flex;
+              align-items: center;
+
+              i {
+                margin-right: 10px;
+                color: #f0a500; // Màu biểu tượng
+              }
+            }
+          }
+        }
+
+        .col-md-8 {
+          .col {
+            .row {
+              display: flex;
+
+              ul {
+                padding: 0;
+                margin-bottom: 20px;
+
+                li {
+                  list-style: none;
+
+                  &.fw-bold {
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                  }
+
+                  a {
+                    text-decoration: none;
+                    color: #aaa;
+                    font-size: 14px;
+                    transition: color 0.3s;
+
+                    &:hover {
+                      color: #f0a500; // Hiệu ứng hover
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media (max-width: 768px) {
+        .row {
+          flex-direction: column;
+
+          .col-md-4, .col-md-8 {
+            text-align: center;
+
+            ul {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+
+
+  } 
 }
 
 video {

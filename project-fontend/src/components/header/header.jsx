@@ -20,7 +20,7 @@ const Header = (props) => {
   const [showSearch, setShowSearch] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartCount = useSelector(state => state.cart.productCount || 0);
+  // const cartCount = useSelector(state => state.cart.productCount || 0);
 
 
   const handleLogin = () => {
@@ -81,7 +81,7 @@ const toggleSearch = () => {
                 <NavDropdown 
                   title="Setting" id="basic-nav-dropdown">
                   <NavDropdown.Item>{account.name}</NavDropdown.Item>
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>navigate('/user/profile')}>Profile</NavDropdown.Item>
                   <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
               }
@@ -152,7 +152,7 @@ const toggleSearch = () => {
                       lineHeight: 1,
                     }}
                   >
-                    {cartCount}
+                    {/* {cartCount} */}
                   </span>
                 )}
               </div>

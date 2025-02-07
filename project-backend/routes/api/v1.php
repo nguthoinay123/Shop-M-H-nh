@@ -6,6 +6,8 @@ use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Category\CategoryController;
 use App\Http\Controllers\API\Product\ProductController;
 use App\Http\Controllers\API\Cart\CartController;
+use App\Http\Controllers\API\Payment\PaymentController;
+
 use App\Http\Middleware\CheckLoginMiddleware;
 use App\Http\Middleware\JwtAuthMiddleware;
 
@@ -31,6 +33,7 @@ Route::get('product/detail/{slug}', [ProductController::class, 'product_detail']
 Route::get('/category/{slug}', [ProductController::class, 'getProductsByCategory']);
 Route::get('category', [CategoryController::class, 'category']);
 
+
 // Route::prefix('cart')->group(function() {
 //         Route::get('/', [CartController::class, 'cart']);
 //         Route::post('/add', [CartController::class, 'addtocart']);
@@ -47,6 +50,7 @@ Route::middleware([JwtAuthMiddleware::class])->group(function () {
       Route::prefix('user')->group(function() {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/profile', [AuthController::class, 'profile']);
+        Route::post('/update', [AuthController::class, 'updateprofile']);
 
     });
     Route::prefix('cart')->group(function() {
@@ -55,6 +59,10 @@ Route::middleware([JwtAuthMiddleware::class])->group(function () {
         Route::patch('/update/{id}', [CartController::class, 'cartupdate']);
         Route::delete('/remove/{id}', [CartController::class, 'removefromcart']);
     });
-
+    Route::prefix('payment')->group(function() {
+            Route::get('/', [PaymentController::class, 'payment']);
+            Route::post('/process', [PaymentController::class, 'processPayment']);
+            Route::get('/done', [PaymentController::class, 'payment_done']);
+        });
 });
 

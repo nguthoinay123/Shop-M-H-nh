@@ -146,7 +146,7 @@ const handleRemoveItem = async (productId) => {
                                 <h5 className="text-danger">CHI TIẾT THANH TOÁN</h5>
                                 <div className="d-flex justify-content-between">
                                     <p>Tạm tính</p>
-                                      {subTotalAmount.toLocaleString('vi-VN')} VNĐ
+                                     <strong> {subTotalAmount.toLocaleString('vi-VN')} VNĐ </strong>
                                   </div>
                                 <div className="d-flex justify-content-between">
                                     <p>Giao hàng</p>
@@ -156,21 +156,10 @@ const handleRemoveItem = async (productId) => {
                                 <hr />
                                 <div className="d-flex justify-content-between">
                                     <p>Tổng thanh toán</p>
-                                    <p>{TotalAmount.toLocaleString('vi-VN')} VNĐ</p>
+                                    <strong>{TotalAmount.toLocaleString('vi-VN')} VNĐ</strong>
                                 </div>
-
-                                <form action="/payment" method="GET">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-outline-danger"
-                                        style={{ padding: '10px 20px', fontSize: '15px', width: '100%', borderRadius: '5px' }}
-                                    >
-                                        Tiến hành thanh toán
-                                    </button>
-                                </form>
-
-                                <div className="voucher-input mt-3">
-                                    {/* <form onSubmit={handleApplyVoucher}>
+                                {/* <div className="voucher-input mt-3">
+                                    <form >
                                         <label htmlFor="voucher" className="form-label">Phiếu giảm giá</label>
                                         <input
                                             type="text"
@@ -182,17 +171,35 @@ const handleRemoveItem = async (productId) => {
                                         <button type="submit" className="btn btn-outline-secondary mt-2 w-100">
                                             Áp dụng
                                         </button>
-                                    </form> */}
+                                    </form>
                                     <div className="alert alert-success mt-2 d-flex justify-content-between align-items-center">
                                         <div></div>
-                                        {/* <button
-                                            onClick={handleRemoveVoucher}
+                                        <button
+                                            // onClick={handleRemoveVoucher}
                                             className="btn btn-danger"
                                         >
                                             Xóa
-                                        </button> */}
+                                        </button>
                                     </div>
+                                </div> */}
+                                <form action="/payment" method="GET">
+                                {dataCart.length === 0 && (
+                                <div className="alert alert-warning text-center mt-4">
+                                    Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm để tiếp tục thanh toán.
                                 </div>
+                                )}
+                                <button
+                                    type="submit"
+                                    className="btn btn-outline-danger"
+                                    style={{ padding: '10px 20px', fontSize: '15px', width: '100%', borderRadius: '5px' }}
+                                    disabled={dataCart.length === 0} // Nút bị vô hiệu hóa nếu giỏ hàng trống
+                                >
+                                    Tiến hành thanh toán
+                                </button>
+                            </form>
+
+
+                               
                             </div>
                         </div>
                     </div>

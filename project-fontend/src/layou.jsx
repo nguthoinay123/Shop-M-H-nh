@@ -12,6 +12,10 @@ import Product from "./components/Products/Product";
 import ProductByCategory from "./components/Products/ProductByCategory";
 import ProductDetail from "./components/Products/Productdetail";
 import Cart from "./components/Cart/Cart";
+import Profile from "./components/Auth/Profile";
+import Payment from "./components/Payment/Payment";
+import PaymentDone from "./components/Payment/PaymentDone";
+import Admin from "./components/Admin/admin";
 
 const NotFound=()=>{
     return(
@@ -35,9 +39,13 @@ const Layout=(props)=>{
                     <Route path="category/:slug" element={<ProductByCategory />} />
                     <Route path="/product/detail/:slug" element={<ProductDetail />} />
                     <Route path="/cart" element={<Cart/>} />
-
+                    <Route path="/user/profile" element={<Profile/>} />
+                    <Route path="/payment" element={<Payment/>} />
+                    <Route path="/payment/done" element={<PaymentDone/>}/>
                 </Route>
-
+                <Route path="admin" element={<Admin />}>
+                    {/* <Route index element={<DashBoard />} />  */}
+                </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="*" element={<NotFound/>}/>

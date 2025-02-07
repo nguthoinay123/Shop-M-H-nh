@@ -74,10 +74,8 @@ public function cart(Request $request)
             return $item->product ? $item->product->price * $item->quantity : 0;
         });
 
-        $voucher = session('voucher', 0);
+        $voucher = session('voucher', default: 0);
         $total = $this->total($subtotal, $voucher);
-
-        session(['subtotal' => $subtotal, 'total' => $total]);
 
         return response()->json([
             'EM' => 'Giỏ hàng Success',
