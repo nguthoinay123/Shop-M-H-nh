@@ -1,28 +1,101 @@
-.sidebar-btn-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .sidebar-btn {
-      transition: width 0.3s;
-      width: 150px;
-      padding: 1px 5px;
-      border-radius: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #adadad;
-      text-decoration: none;
-      margin: 0 auto;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      span {
-        margin-left: 5px;
-        font-size: 13px;
-      }
-      &:hover {
-        color: #dee2ec;
-      }
+:root {
+    --primary: #009CFF;
+    --light: #F3F6F9;
+    --dark: #191C24;
+}
+
+/* Sidebar Layout */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--light);
+    transition: 0.5s;
+    z-index: 999;
+
+    @media (max-width: 991.98px) {
+        margin-left: -250px;
+
+        &.open {
+            margin-left: 0;
+        }
     }
-  }
+}
+
+/* Navbar Styles */
+.sidebar .navbar {
+    .navbar-nav {
+        display: flex;
+        justify-content: flex-end; /* Align nav items to the right */
+        align-items: center;
+
+        .nav-link {
+            padding: 7px 20px;
+            color: var(--dark);
+            font-weight: 500;
+            border-left: 3px solid var(--light);
+            border-radius: 0 30px 30px 0;
+            outline: none;
+
+            &:hover,
+            &.active {
+                color: var(--primary);
+                background: #fff;
+                border-color: var(--primary);
+            }
+
+            i {
+                width: 40px;
+                height: 40px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+                border-radius: 50%;
+                transition: background 0.3s;
+
+                &:hover,
+                &.active {
+                    background: var(--light);
+                }
+            }
+        }
+    }
+}
+
+/* Avatar Styles */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.avatar-status {
+    width: 12px;
+    height: 12px;
+    background-color: green;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid white;
+}
+
+/* Sidebar User Info */
+.sidebar .navbar .d-flex {
+    margin-left: 10px;
+}
+
+.sidebar .navbar .ms-3 h6 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.sidebar .navbar .ms-3 span {
+    font-size: 0.875rem;
+    color: var(--dark);
+}

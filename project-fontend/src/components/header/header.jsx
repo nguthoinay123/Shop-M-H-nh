@@ -95,7 +95,7 @@ const toggleSearch = () => {
 
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <NavLink to='/' className="navbar-brand">Mô Hình Shop</NavLink>
+        <NavLink to='/' className="navbar-brand">THAI AN</NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -137,24 +137,7 @@ const toggleSearch = () => {
                   style={{ fontSize: "26px", cursor: "pointer" }}
                   onClick={() => navigate('/cart')}
                 />
-                {isAuthenticated && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "-10px",
-                      right: "-10px",
-                      backgroundColor: "red",
-                      color: "white",
-                      borderRadius: "50%",
-                      padding: "2px 6px",
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {/* {cartCount} */}
-                  </span>
-                )}
+                
               </div>
             </div>
         </Navbar.Collapse>
@@ -165,3 +148,21 @@ const toggleSearch = () => {
 };
 
 export default Header;
+// {isAuthenticated && (
+//                   <span
+//                     style={{
+//                       position: "absolute",
+//                       top: "-10px",
+//                       right: "-10px",
+//                       backgroundColor: "red",
+//                       color: "white",
+//                       borderRadius: "50%",
+//                       padding: "2px 6px",
+//                       fontSize: "12px",
+//                       fontWeight: "bold",
+//                       lineHeight: 1,
+//                     }}
+//                   >
+//                     {/* {cartCount} */}
+//                   </span>
+//                 )}
